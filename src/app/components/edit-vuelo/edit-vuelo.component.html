@@ -29,22 +29,22 @@
                   *ngIf="idVueloControl?.errors &&idVueloControl?.hasError('consultaVacia') &&  !idVueloControl?.hasError('required')"
                   severity="error" text="Vuelo no Existe "></p-message>
               </div>
-              <div class="row justify-content-center text-center mt-2">
-                <div class="col-6">
+              <div class="row justify-content-center text-center">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-2">
                   <p-dropdown placeholder="Ingrese Aeropuerto Entrada" [options]="AeropuertosEntrada"
                     formControlName="aentrada" optionLabel="name" [showClear]="true" optionValue="name"></p-dropdown>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-2">
                   <p-dropdown placeholder="Ingrese Aeropuerto Salida" [options]="AeropuertosSalida"
                     formControlName="asalida" optionLabel="name" [showClear]="true" optionValue="name"></p-dropdown>
                 </div>
               </div>
-              <div class="row justify-content-center text-center mt-2">
-                <div class="col-6">
+              <div class="row justify-content-center text-center">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-2">
                   <p-calendar [showTime]="true" [showSeconds]="true" inputId="time" dateFormat="dd/mm/yy"
                     placeholder="Ingrese Fecha Entrada" formControlName="fechaEntrada"></p-calendar>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-2">
                   <p-calendar [showTime]="true" [showSeconds]="true" inputId="time" dateFormat="dd/mm/yy"
                     placeholder="Ingrese Fecha Salida" formControlName="fechaSalida"></p-calendar>
                 </div>
