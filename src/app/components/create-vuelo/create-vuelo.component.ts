@@ -5,6 +5,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MessageService } from 'primeng/api';
 import { firstValueFrom } from 'rxjs';
 import { Services } from 'src/app/app.service';
+import { PrimaryWhite, SecondaryGrey } from 'src/app/Constantes';
 import { Aeropuerto, ICrearVuelo } from 'src/app/res.interface';
 
 @Component({
@@ -15,6 +16,8 @@ import { Aeropuerto, ICrearVuelo } from 'src/app/res.interface';
 export class CreateVueloComponent implements OnInit {
   formConsulta!: FormGroup;
   loading: boolean = false;
+  primaryColour = PrimaryWhite;
+  secondaryColour = SecondaryGrey;
   displayedColumns: string[] = [
     'idVuelo',
     'numeroPasaporte',
@@ -65,7 +68,10 @@ export class CreateVueloComponent implements OnInit {
     private messageService: MessageService
   ) {
     this.formConsulta = this.formBuilder.group({
-      pasaporte: [null, { validators: [Validators.required] }],
+      pasaporte: [
+        null,
+        { validators: [Validators.required, Validators.minLength(8)] },
+      ],
       aentrada: [null, { validators: [Validators.required] }],
       asalida: [null, { validators: [Validators.required] }],
       fechaEntrada: [null, { validators: [Validators.required] }],
@@ -107,6 +113,8 @@ export class CreateVueloComponent implements OnInit {
       fechaHoraEntrada: fechaEntrada,
       fechaHoraSalida: fechaSalida,
     };
+    this.mostrarTable = false;
+    this.loading = true;
     const newVuelo$ = this.services.postVuelo(data);
     await firstValueFrom(newVuelo$)
       .then(async (data) => {
@@ -116,6 +124,7 @@ export class CreateVueloComponent implements OnInit {
         }
       })
       .catch((err) => {
+        this.loading = false;
         console.error('error', err);
       });
   }
@@ -129,8 +138,10 @@ export class CreateVueloComponent implements OnInit {
         this.dataSource = dataArray;
         this.mostrarTable = true;
         this.formConsulta.reset();
+        this.loading = false;
       })
       .catch((error) => {
+        this.loading = false;
         console.error('error', error);
       });
   }

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Services } from 'src/app/app.service';
 import { firstValueFrom } from 'rxjs';
+import { PrimaryWhite, SecondaryGrey } from 'src/app/Constantes';
 
 @Component({
   selector: 'app-get-vuelo',
@@ -12,6 +13,8 @@ import { firstValueFrom } from 'rxjs';
 export class GetVueloComponent implements OnInit {
   formConsulta!: FormGroup;
   loading: boolean = false;
+  primaryColour = PrimaryWhite;
+  secondaryColour = SecondaryGrey;
   displayedColumns: string[] = [
     'idVuelo',
     'numeroPasaporte',

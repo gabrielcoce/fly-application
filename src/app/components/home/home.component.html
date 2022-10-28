@@ -1,6 +1,14 @@
+<ng-template #emptyLoadingTemplate></ng-template>
+<ngx-loading [show]="loading" [config]="{
+        primaryColour: primaryColour,
+        secondaryColour: secondaryColour,
+        tertiaryColour: primaryColour,
+        backdropBorderRadius: '3px'
+      }" [template]="emptyLoadingTemplate"></ngx-loading>
 <div class="container text-center mt-3">
   <h1 class="text-center fw-bold text-uppercase">Bienvenidos a Fly Application</h1>
-  <p-button type="button" label="CONSULTAR VUELOS" (onClick)="consultar()"></p-button>
+  <p-button pRipple type="button" label="CONSULTAR VUELOS" icon="pi pi-search" class="p-button-rounded"
+    (onClick)="consultar()"></p-button>
 </div>
 <ng-container *ngIf="mostrarTable">
   <div class="container mt-3">

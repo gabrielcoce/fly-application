@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/api';
 import { Services } from 'src/app/app.service';
 import { Aeropuerto, ICrearVuelo, IEditarVuelo } from 'src/app/res.interface';
 import { firstValueFrom } from 'rxjs';
+import { PrimaryWhite, SecondaryGrey } from 'src/app/Constantes';
 
 @Component({
   selector: 'app-edit-vuelo',
@@ -15,6 +16,8 @@ import { firstValueFrom } from 'rxjs';
 export class EditVueloComponent implements OnInit {
   formConsulta!: FormGroup;
   loading: boolean = false;
+  primaryColour = PrimaryWhite;
+  secondaryColour = SecondaryGrey;
   displayedColumns: string[] = [
     'idVuelo',
     'numeroPasaporte',
@@ -119,6 +122,7 @@ export class EditVueloComponent implements OnInit {
       fechaHoraEntrada: fechaEntrada,
       fechaHoraSalida: fechaSalida,
     };
+    this.mostrarTable = false;
     const newVuelo$ = this.services.putVuelo(data);
     await firstValueFrom(newVuelo$)
       .then(async (data) => {

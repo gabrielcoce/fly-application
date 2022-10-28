@@ -7,12 +7,9 @@ import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxLoadingModule } from 'ngx-loading';
 import { HttpClientModule } from '@angular/common/http';
-import {
-  APP_BASE_HREF,
-  HashLocationStrategy,
-  LocationStrategy,
-} from '@angular/common';
+import { APP_BASE_HREF } from '@angular/common';
 import { Services } from './app.service';
 import { CreateVueloComponent } from './components/create-vuelo/create-vuelo.component';
 import { EditVueloComponent } from './components/edit-vuelo/edit-vuelo.component';
@@ -43,6 +40,7 @@ dayjs.extend(localizedFormat);
     MaterialModule,
     PrimengModule,
     NgxSpinnerModule,
+    NgxLoadingModule.forRoot({}),
     HttpClientModule,
     BrowserAnimationsModule,
   ],

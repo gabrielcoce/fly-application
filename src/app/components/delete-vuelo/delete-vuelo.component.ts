@@ -4,6 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MessageService } from 'primeng/api';
 import { Services } from 'src/app/app.service';
 import { firstValueFrom } from 'rxjs';
+import { PrimaryWhite, SecondaryGrey } from 'src/app/Constantes';
 
 @Component({
   selector: 'app-delete-vuelo',
@@ -13,6 +14,8 @@ import { firstValueFrom } from 'rxjs';
 export class DeleteVueloComponent implements OnInit {
   formConsulta!: FormGroup;
   loading: boolean = false;
+  primaryColour = PrimaryWhite;
+  secondaryColour = SecondaryGrey;
   constructor(
     private formBuilder: FormBuilder,
     private services: Services,

@@ -1,3 +1,10 @@
+<ng-template #emptyLoadingTemplate></ng-template>
+<ngx-loading [show]="loading" [config]="{
+        primaryColour: primaryColour,
+        secondaryColour: secondaryColour,
+        tertiaryColour: primaryColour,
+        backdropBorderRadius: '3px'
+      }" [template]="emptyLoadingTemplate"></ngx-loading>
 <!--* Component -->
 <div class="container center-component">
   <div class="container-fluid">
@@ -23,20 +30,32 @@
           <mat-card class="mat-elevation-z2">
             <div class="container">
               <div class="d-flex justify-content-center">
-                <input placeholder="Ingrese Número de Vuelo" type="text" class="text-capitalize col-6" pInputText
+                <input placeholder="Ingrese Número de Vuelo" type="text" class="text-capitalize col-6 me-2" pInputText
                   maxlength="36" formControlName="idVuelo" />
-                <p-message class="ms-2"
-                  *ngIf="idVueloControl?.errors &&idVueloControl?.hasError('consultaVacia') &&  !idVueloControl?.hasError('required')"
+                <p-message
+                  *ngIf="idVueloControl?.errors  &&  idVueloControl?.hasError('required') && idVueloControl.touched"
+                  severity="error" text="El campo es requerido "></p-message>
+                <p-message
+                  *ngIf="idVueloControl?.errors  &&  !idVueloControl?.hasError('required') && idVueloControl?.hasError('pattern') && idVueloControl.dirty"
+                  severity="error" text="Vuelo invalido "></p-message>
+                <p-message
+                  *ngIf="idVueloControl?.errors && idVueloControl?.hasError('consultaVacia') &&  !idVueloControl?.hasError('required') && (!idVueloControl?.hasError('minlength') || !idVueloControl?.hasError('pattern'))"
                   severity="error" text="Vuelo no Existe "></p-message>
               </div>
               <div class="row justify-content-center text-center">
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-2">
                   <p-dropdown placeholder="Ingrese Aeropuerto Entrada" [options]="AeropuertosEntrada"
                     formControlName="aentrada" optionLabel="name" [showClear]="true" optionValue="name"></p-dropdown>
+                  <p-message
+                    *ngIf="aEntradaControl?.errors  &&  aEntradaControl?.hasError('required') && aEntradaControl.touched"
+                    severity="error" text="El campo es requerido "></p-message>
                 </div>
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 mt-2">
                   <p-dropdown placeholder="Ingrese Aeropuerto Salida" [options]="AeropuertosSalida"
                     formControlName="asalida" optionLabel="name" [showClear]="true" optionValue="name"></p-dropdown>
+                  <p-message
+                    *ngIf="aSalidaControl?.errors  &&  aSalidaControl?.hasError('required') && aSalidaControl.touched"
+                    severity="error" text="El campo es requerido "></p-message>
                 </div>
               </div>
               <div class="row justify-content-center text-center">
@@ -59,8 +78,8 @@
                   [disabled]="!formConsulta.valid" id="userBtn">
                   <mat-icon>edit</mat-icon>
                   Editar
-                  <div class="spinner-border ms-2" role="status" *ngIf="loading">
-                  </div>
+                  <!-- <div class="spinner-border ms-2" role="status" *ngIf="loading">
+                  </div> -->
                 </button>
               </div>
             </div>
