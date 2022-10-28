@@ -1,0 +1,59 @@
+<!--* Component -->
+<div class="container center-component">
+  <div class="container-fluid">
+    <!-- ENCABEZADO -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card my-1 mx-auto bg-light">
+          <div class="card-header position-relative">
+            <div class="card-icon rounded mat-elevation-z8 position-absolute top-40 start-40 translate-middle">
+              <mat-icon class="icon">airplane_ticket</mat-icon>
+            </div>
+            <div class="row ms-5 header">
+              <h1 class="textHeader text-uppercase">Eliminar Vuelo</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="formConsulta">
+      <!-- BODY -->
+      <div class="row">
+        <div class="col-md-12">
+          <mat-card class="mat-elevation-z2">
+            <div class="container">
+              <div class="d-flex justify-content-center">
+                <input placeholder="Ingrese Número de Vuelo" type="text" class="text-capitalize col-6" pInputText maxlength="36"
+                  formControlName="idVuelo" />
+                <p-message class="ms-2"
+                  *ngIf="idVueloControl?.errors  &&  idVueloControl?.hasError('required') && idVueloControl.touched" severity="error"
+                  text="El campo es requerido "></p-message>
+                <p-message class="ms-2"
+                  *ngIf="idVueloControl?.errors  &&  !idVueloControl?.hasError('required') && idVueloControl?.hasError('pattern') && idVueloControl.dirty"
+                  severity="error" text="Vuelo invalido "></p-message>
+                <p-message class="ms-2"
+                  *ngIf="idVueloControl?.errors && idVueloControl?.hasError('consultaVacia') &&  !idVueloControl?.hasError('required') && (!idVueloControl?.hasError('minLength') || !idVueloControl?.hasError('pattern'))"
+                  severity="error" text="Vuelo no Existe "></p-message>
+              </div>
+              <!-- {{ consultaControl.errors | json }} -->
+              <div class="container text-center mt-3">
+                <!--DIVISION ENTRE INPUT Y BOTONES-->
+                <div class="row justify-content-center">
+                  <hr class="hr col-6" width="50%">
+                </div>
+                <button mat-raised-button type="button" class="btn btn-blue-sat btn-lg" (click)="validateForm()"
+                  [disabled]="!formConsulta.valid" id="userBtn">
+                  <mat-icon>delete</mat-icon>
+                  Eliminar
+                  <div class="spinner-border ms-2" role="status" *ngIf="loading">
+                  </div>
+                </button>
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<p-toast></p-toast>

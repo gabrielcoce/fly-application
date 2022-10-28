@@ -1,0 +1,118 @@
+<!--* Component -->
+<div class="container center-component">
+  <div class="container-fluid">
+    <!-- ENCABEZADO -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card my-1 mx-auto bg-light">
+          <div class="card-header position-relative">
+            <div class="card-icon rounded mat-elevation-z8 position-absolute top-40 start-40 translate-middle">
+              <mat-icon class="icon">airplane_ticket</mat-icon>
+            </div>
+            <div class="row ms-5 header">
+              <h1 class="textHeader text-uppercase">Editar Vuelo</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="formConsulta">
+      <!-- BODY -->
+      <div class="row">
+        <div class="col-md-12">
+          <mat-card class="mat-elevation-z2">
+            <div class="container">
+              <div class="d-flex justify-content-center">
+                <input placeholder="Ingrese Número de Vuelo" type="text" class="text-capitalize col-6" pInputText
+                  maxlength="36" formControlName="idVuelo" />
+                <p-message class="ms-2"
+                  *ngIf="idVueloControl?.errors &&idVueloControl?.hasError('consultaVacia') &&  !idVueloControl?.hasError('required')"
+                  severity="error" text="Vuelo no Existe "></p-message>
+              </div>
+              <div class="row justify-content-center text-center mt-2">
+                <div class="col-6">
+                  <p-dropdown placeholder="Ingrese Aeropuerto Entrada" [options]="AeropuertosEntrada"
+                    formControlName="aentrada" optionLabel="name" [showClear]="true" optionValue="name"></p-dropdown>
+                </div>
+                <div class="col-6">
+                  <p-dropdown placeholder="Ingrese Aeropuerto Salida" [options]="AeropuertosSalida"
+                    formControlName="asalida" optionLabel="name" [showClear]="true" optionValue="name"></p-dropdown>
+                </div>
+              </div>
+              <div class="row justify-content-center text-center mt-2">
+                <div class="col-6">
+                  <p-calendar [showTime]="true" [showSeconds]="true" inputId="time" dateFormat="dd/mm/yy"
+                    placeholder="Ingrese Fecha Entrada" formControlName="fechaEntrada"></p-calendar>
+                </div>
+                <div class="col-6">
+                  <p-calendar [showTime]="true" [showSeconds]="true" inputId="time" dateFormat="dd/mm/yy"
+                    placeholder="Ingrese Fecha Salida" formControlName="fechaSalida"></p-calendar>
+                </div>
+              </div>
+              <!-- {{ consultaControl.errors | json }} -->
+              <div class="container text-center mt-3">
+                <!--DIVISION ENTRE INPUT Y BOTONES-->
+                <div class="row justify-content-center">
+                  <hr class="hr col-6" width="50%">
+                </div>
+                <button mat-raised-button type="button" class="btn btn-blue-sat btn-lg" (click)="validateForm()"
+                  [disabled]="!formConsulta.valid" id="userBtn">
+                  <mat-icon>edit</mat-icon>
+                  Editar
+                  <div class="spinner-border ms-2" role="status" *ngIf="loading">
+                  </div>
+                </button>
+              </div>
+            </div>
+            <mat-card-content class="mat-elevation-z2 mt-3">
+              <div class="table-responsive" *ngIf="mostrarTable">
+                <table mat-table [dataSource]="dataSource" matSort matSortDisabled style="width: 100%">
+                  <ng-container matColumnDef="idVuelo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table"> ID
+                      VUELO
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.idVuelo}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="numeroPasaporte">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table">
+                      NÚMERO
+                      PASAPORTE </th>
+                    <td mat-cell *matCellDef="let element"> {{element.numeroPasaporte}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="aeropuertoEntrada">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table">
+                      AEROPUERTO ENTRADA </th>
+                    <td mat-cell *matCellDef="let element"> {{element.aeropuertoEntrada}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="aeropuertoSalida">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table">
+                      AEROPUERTO SALIDA </th>
+                    <td mat-cell *matCellDef="let element"> {{element.aeropuertoSalida}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="fechaHoraEntrada">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table">
+                      FECHA Y
+                      HORA ENTRADA </th>
+                    <td mat-cell *matCellDef="let element"> {{element.fechaHoraEntrada | date:
+                      'dd/MM/yyyy HH:mm:ss'}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="fechaHoraSalida">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-table">
+                      FECHA Y
+                      HORA SALIDA </th>
+                    <td mat-cell *matCellDef="let element"> {{element.fechaHoraSalida | date:
+                      'dd/MM/yyyy HH:mm:ss'}}
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<p-toast></p-toast>

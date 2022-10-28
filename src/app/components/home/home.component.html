@@ -1,0 +1,40 @@
+<div class="container text-center mt-3">
+  <h1 class="text-center fw-bold text-uppercase">Bienvenidos a Fly Application</h1>
+  <p-button type="button" label="CONSULTAR VUELOS" (onClick)="consultar()"></p-button>
+</div>
+<ng-container *ngIf="mostrarTable">
+  <div class="container mt-3">
+    <p-table [value]="dataSource" [paginator]="true" [rows]="5" [showCurrentPageReport]="true" responsiveLayout="scroll"
+      currentPageReportTemplate="Mostrar {first} al {last} de {totalRecords} Vuelos"
+      [rowsPerPageOptions]="[5,10,25,50]">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="text-center">ID VUELO</th>
+          <th class="text-center">NÚMERO DE PASAPORTE</th>
+          <th class="text-center">AEROPUERTO ENTRADA</th>
+          <th class="text-center">AEROPUERTO SALIDA</th>
+          <th class="text-center">FECHA Y HORA DE ENTRADA</th>
+          <th class="text-center">FECHA Y HORA DE SALIDA</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-dataSource>
+        <tr>
+          <td class="text-center">{{dataSource.idVuelo}}</td>
+          <td class="text-center">{{dataSource.numeroPasaporte | uppercase}}</td>
+          <td class="text-center">{{dataSource.aeropuertoEntrada | uppercase}}</td>
+          <td class="text-center">{{dataSource.aeropuertoSalida | uppercase}}</td>
+          <td class="text-center">{{dataSource.fechaHoraEntrada | date:
+            'dd/MM/yyyy HH:mm:ss'}}</td>
+          <td class="text-center">{{dataSource.fechaHoraSalida | date:
+            'dd/MM/yyyy HH:mm:ss'}}</td>
+        </tr>
+      </ng-template>
+      <!-- <ng-template pTemplate="paginatorleft">
+      <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+      <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+    </ng-template> -->
+    </p-table>
+  </div>
+</ng-container>

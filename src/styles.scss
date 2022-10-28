@@ -1,1 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~bootstrap/scss/bootstrap.scss";
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+//*
+.center-component {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.card-icon {
+  height: 5rem;
+  width: 5rem;
+  background: linear-gradient(60deg, #063970, #063970);
+  color: white;
+}
+
+.mat-icon.icon {
+  font-size: 50px;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+.full {
+  width: 100%;
+}
+
+.btn-blue-sat {
+  background-color: #063970 !important;
+  color: white !important;
+  text-transform: uppercase;
+}
+.mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+th.mat-header-cell,
+td.mat-cell {
+  text-align: center;
+}
+
+.header-table {
+  background-color: #063970 !important;
+  color: white !important;
+}
